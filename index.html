@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Прекрасный город Фэлешть</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;800&family=Literata:wght@400;600&display=swap">
+<style>
+:root{--bg:#f1f5e9;--ink:#1e3a2b;--sun:#f0b323;--soil:#5a3a28;--plum:#6a2c5b;--line:#c9d5bb;--sky:#d9ebf3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14201a;--ink:#e8efdc;--line:#2c4034;--sky:#1d3340;--soil:#d8b79c;--plum:#e3a6d3}}
+:root[data-theme="dark"]{--bg:#14201a;--ink:#e8efdc;--line:#2c4034;--sky:#1d3340;--soil:#d8b79c;--plum:#e3a6d3}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.7 Literata,Georgia,serif}
+h1,h2,h3{font-family:Rubik,Arial,sans-serif;line-height:1.05;margin:0}
+.hero{background:var(--sky);position:relative;overflow:hidden;padding:22vw 6vw 0}
+.hero h1{font-weight:800;font-size:clamp(3.2rem,15vw,9rem);letter-spacing:-.03em;position:relative;z-index:2}
+.hero p{max-width:30ch;font-size:1.25rem;margin:1rem 0 0;position:relative;z-index:2}
+.sun{position:absolute;right:8vw;top:8vw;width:16vw;height:16vw;max-width:150px;max-height:150px;border-radius:50%;background:var(--sun)}
+.hero svg{display:block;width:100%;height:auto;margin-top:-4vw;position:relative;z-index:1}
+main{max-width:720px;margin:0 auto;padding:0 6vw}
+section{padding:3.5rem 0 0}
+h2{font-weight:800;font-size:clamp(1.8rem,6vw,2.6rem);margin-bottom:1rem}
+.row{display:grid;grid-template-columns:1fr;gap:.25rem;padding:1.2rem 0;border-top:2px solid var(--line)}
+.row h3{font-weight:500;font-size:1.3rem;color:var(--plum)}
+.row p{margin:0}
+.quote{margin:3rem 0 0;padding:1.5rem 1.5rem 1.5rem 1.2rem;border-left:8px solid var(--sun);font-size:1.3rem;color:var(--soil)}
+button{font:500 1rem Rubik,Arial,sans-serif;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:.8rem 1.4rem;cursor:pointer;margin-top:1rem}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+#fact{min-height:3.4em;margin-top:1rem}
+footer{margin-top:4rem;padding:2rem 6vw calc(2rem + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);text-align:center}
+footer b{color:var(--sun)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <h1>Фэлешть</h1>
+  <p>Прекрасный город на северо-западе Молдовы</p>
+  <svg viewBox="0 0 800 180" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 80 Q150 20 300 70 T600 60 T800 50 V180 H0Z" fill="#8fb36b"/>
+    <path d="M0 120 Q200 70 400 115 T800 100 V180 H0Z" fill="#4f8a4a"/>
+    <path d="M0 155 Q250 120 500 150 T800 140 V180 H0Z" fill="#1e3a2b"/>
+  </svg>
+</header>
+<main>
+  <section>
+    <h2>О городе</h2>
+    <p>Фэлешть (молд. Fălești) — город на северо-западе Молдовы и центр одноимённого района. Это спокойное место среди холмов и полей, где знают соседей по именам, а весной пахнет цветущими садами.</p>
+  </section>
+  <section>
+    <h2>Что здесь любят</h2>
+    <div class="row"><h3>Простор и природа</h3><p>Вокруг города — холмистые поля и сады. Хороший повод выйти на длинную прогулку.</p></div>
+    <div class="row"><h3>Гостеприимство</h3><p>Здесь принято накрыть стол для гостя. Домашняя еда и молдавское вино — часть местного характера.</p></div>
+    <div class="row"><h3>Уютный ритм жизни</h3><p>Небольшой город без суеты: всё рядом, а вечером на улицах тихо.</p></div>
+  </section>
+  <section>
+    <h2>Скажи о Фэлештах доброе слово</h2>
+    <button id="btn" type="button">Показать фразу</button>
+    <p id="fact" aria-live="polite">Нажми на кнопку.</p>
+  </section>
+  <blockquote class="quote">Город красив не только видами, но и людьми, которые в нём живут.</blockquote>
+</main>
+<footer>
+  <p>Сайт разработал <b>Влад Карабуля</b></p>
+</footer>
+<script>
+var phrases=["Здесь хорошо возвращаться.","Тихий город с большим сердцем.","Каждый закат в Фэлештах — как открытка.","Место, где рады гостям.","Родные улицы, родные люди."];
+var i=-1;
+document.getElementById('btn').addEventListener('click',function(){
+  i=(i+1)%phrases.length;
+  document.getElementById('fact').textContent=phrases[i];
+});
+</script>
+</body>
+</html>
